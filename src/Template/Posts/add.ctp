@@ -1,6 +1,6 @@
 <h1>Agregar Post</h1>
 <?php
-echo $this->Form->create($post);
+echo $this->Form->create($post, ['novalidate' => 'novalidate']);
 // Hard code the user for now.
 echo $this->Form->control('user_id', ['type' => 'hidden', 'value' => 1]);
 echo $this->Form->control('title');
