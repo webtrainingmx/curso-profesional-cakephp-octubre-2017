@@ -5,6 +5,7 @@
     <tr>
         <th>Título</th>
         <th>Creado en</th>
+        <th>Acciones</th>
     </tr>
     <?php foreach ($posts as $post): ?>
         <tr>
@@ -13,6 +14,9 @@
             </td>
             <td>
                 <?= $post->created->format(DATE_RFC850) ?>
+            </td>
+            <td>
+                <?= $this->Html->link('Editar', ['action' => 'edit', $post->slug]) ?>
             </td>
         </tr>
     <?php endforeach; ?>
