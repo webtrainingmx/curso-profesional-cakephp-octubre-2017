@@ -13,6 +13,12 @@ use App\Controller\AppController;
 class UsersController extends AppController
 {
 
+    public function __construct($request = null, $response = null, $name = null, $eventManager = null, $components = null)
+    {
+        parent::__construct($request, $response, $name, $eventManager, $components);
+        $this->viewBuilder()->setLayout('webtraning-zone');
+    }
+
     /**
      * Index method
      *

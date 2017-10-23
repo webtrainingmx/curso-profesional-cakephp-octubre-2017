@@ -1,0 +1,14 @@
+.columns {
+    margin-top: 30px;
+}
+
+.side-nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.side-nav li {
+    display: inline-block;
+    list-style: none;
+}
