@@ -43,6 +43,12 @@ use Cake\Routing\Route\DashedRoute;
  */
 Router::defaultRouteClass(DashedRoute::class);
 
+Router::scope('/posts',
+    ['controller' => 'Posts'],
+    function ($routes) {
+        $routes->connect('/categorized/*', ['action' => 'categories']);
+    });
+
 Router::scope('/', function (RouteBuilder $routes) {
     /**
      * Here, we are connecting '/' (base path) to a controller called 'Pages',

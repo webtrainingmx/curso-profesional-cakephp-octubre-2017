@@ -5,6 +5,7 @@ namespace App\Model\Table;
 use Cake\ORM\Table;
 use Cake\Utility\Text;
 use Cake\Validation\Validator;
+use Cake\ORM\Query;
 
 class PostsTable extends Table
 {
@@ -33,5 +34,28 @@ class PostsTable extends Table
     {
         $this->addBehavior('Timestamp');
         $this->belongsToMany('Categories'); // Add this line
+    }
+
+    public function findCategorized(Query $query, array $options)
+    {
+        $columns = [
+            'Posts.id', 'Posts.user_id', 'Posts.title',
+            'Posts.body', 'Posts.published', 'Posts.created',
+            'Posts.slug',
+        ];
+
+        $query = $query
+            ->select($columns)
+            ->distinct($columns);
+
+        if (empty($options['categories'])) {
+            // Posts sin categorias
+            $query->leftJoinWith('Categories')
+                ->where(['Categories.title IS' => null]);
+        } else {
+            $query->innerJoinWith('Categories')
+                ->where(['Categories.title IN' => $options['categories']]);
+        }
+        return $query->group(['Posts.id']);
     }
 }

@@ -48,7 +48,7 @@ class PostsController extends AppController
     {
         $post = $this->Posts
             ->findBySlug($slug)
-            ->contain('Categories') // Cargar categorías
+            ->contain('Categories')// Cargar categorías
             ->firstOrFail();
 
         if ($this->request->is(['post', 'put'])) {
@@ -62,8 +62,6 @@ class PostsController extends AppController
 
         // Get a list of categories
         $categories = $this->Posts->Categories->find('list');
-
-
 
         $this->set('categories', $categories);
 
@@ -79,5 +77,19 @@ class PostsController extends AppController
             $this->Flash->success(__('El {0} post ha sido eliminado', $post->title));
             return $this->redirect(['action' => 'index']);
         }
+    }
+
+    public function categories()
+    {
+        // The 'pass' key is provided by CakePHP and contains all
+        // the passed URL path segments in the request.
+        $categories = $this->request->getParam('pass');
+
+        $posts = $this->Posts->find('categorized', [
+            'categories' => $categories
+        ]);
+
+        $this->set(['posts' => $posts, 'categories' => $categories]);
+
     }
 }
