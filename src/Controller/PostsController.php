@@ -36,12 +36,21 @@ class PostsController extends AppController
             $this->Flash->error(__('No se ha podido guardar'));
         }
 
+        // Get a list of categories
+        $categories = $this->Posts->Categories->find('list');
+
+        $this->set('categories', $categories);
+
         $this->set(compact('post'));
     }
 
     public function edit($slug)
     {
-        $post = $this->Posts->findBySlug($slug)->firstOrFail();
+        $post = $this->Posts
+            ->findBySlug($slug)
+            ->contain('Categories') // Cargar categorías
+            ->firstOrFail();
+
         if ($this->request->is(['post', 'put'])) {
             $this->Posts->patchEntity($post, $this->request->getData());
             if ($this->Posts->save($post)) {
@@ -50,6 +59,13 @@ class PostsController extends AppController
             }
             $this->Flash->error(__('No se ha podido guardar'));
         }
+
+        // Get a list of categories
+        $categories = $this->Posts->Categories->find('list');
+
+
+
+        $this->set('categories', $categories);
 
         $this->set('post', $post);
     }

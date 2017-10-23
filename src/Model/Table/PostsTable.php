@@ -32,5 +32,6 @@ class PostsTable extends Table
     public function initialize(array $config)
     {
         $this->addBehavior('Timestamp');
+        $this->belongsToMany('Categories'); // Add this line
     }
 }
