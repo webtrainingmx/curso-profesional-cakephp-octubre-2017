@@ -38,4 +38,19 @@ class PostsController extends AppController
 
         $this->set(compact('post'));
     }
+
+    public function edit($slug)
+    {
+        $post = $this->Posts->findBySlug($slug)->firstOrFail();
+        if ($this->request->is(['post', 'put'])) {
+            $this->Posts->patchEntity($post, $this->request->getData());
+            if ($this->Posts->save($post)) {
+                $this->Flash->success(__('Post guardado'));
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('No se ha podido guardar'));
+        }
+
+        $this->set('post', $post);
+    }
 }
