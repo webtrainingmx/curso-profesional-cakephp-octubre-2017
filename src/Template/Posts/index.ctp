@@ -1,5 +1,6 @@
 <h1>Posts</h1>
 
+<?= $this->Html->link('Agregar Post', ['action' => 'add']) ?>
 <table>
     <tr>
         <th>Título</th>
