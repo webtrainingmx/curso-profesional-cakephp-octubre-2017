@@ -53,4 +53,15 @@ class PostsController extends AppController
 
         $this->set('post', $post);
     }
+
+    public function delete($slug)
+    {
+        $this->request->allowMethod(['post', 'delete']);
+
+        $post = $this->Posts->findBySlug($slug)->firstOrFail();
+        if ($this->Posts->delete($post)) {
+            $this->Flash->success(__('El {0} post ha sido eliminado', $post->title));
+            return $this->redirect(['action' => 'index']);
+        }
+    }
 }

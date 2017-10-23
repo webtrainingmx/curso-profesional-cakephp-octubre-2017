@@ -17,7 +17,13 @@
             </td>
             <td>
                 <?= $this->Html->link('Editar', ['action' => 'edit', $post->slug]) ?>
+                <?= $this->Form->postLink(
+                    'Eliminar',
+                    ['action' => 'delete', $post->slug],
+                    ['confirm' => 'Estás seguro de eliminar el post:' . $post->title . '?'])
+                ?>
             </td>
+
         </tr>
     <?php endforeach; ?>
 </table>
