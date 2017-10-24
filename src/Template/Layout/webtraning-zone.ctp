@@ -30,12 +30,15 @@ $cakeDescription = 'Webtraining Zone';
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Asap+Condensed|Open+Sans:400,700" rel="stylesheet">
 <!--    <link rel="stylesheet" href="css/">-->
+    <?= $this->Html->css('all-styles.css') ?>
     <?= $this->Html->css('webtraining-zone.css') ?>
 </head>
 <body>
-
+    <?php echo $this->element('common/header'); ?>
     <?= $this->Flash->render() ?>
     <div class="container clearfix">
         <?= $this->fetch('content') ?>
