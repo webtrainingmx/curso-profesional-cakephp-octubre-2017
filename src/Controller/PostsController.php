@@ -5,6 +5,31 @@ namespace App\Controller;
 
 class PostsController extends AppController
 {
+    public function initialize()
+    {
+        parent::initialize();
+        $this->Auth->allow(['index']);
+    }
+
+    public function isAuthorized($user)
+    {
+        $action = $this->request->getParam('action');
+        // Add posts is ALWAYS allowed for authenticated users
+        if (in_array($action, ['add'])) {
+            return true;
+        }
+
+        // All other Posts actions require the SLUG
+        $slug = $this->request->getParam('pass.0');
+        if (!$slug) {
+            return false;
+        }
+
+        $post = $this->Posts->findBySlug($slug)->first();
+
+
+        return $post->user_id === $user['id'];
+    }
 
     public function index()
     {

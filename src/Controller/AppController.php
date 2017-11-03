@@ -46,6 +46,8 @@ class AppController extends Controller
         $this->loadComponent('Flash');
 
         $this->loadComponent('Auth', [
+            // Added this line
+            'authorize'=> 'Controller',
             'authenticate' => [
                 'Form' => [
 //                    'userModel' => 'Users', //your Model Name
@@ -90,5 +92,11 @@ class AppController extends Controller
         ) {
             $this->set('_serialize', true);
         }
+    }
+
+    public function isAuthorized($user)
+    {
+        // By default deny access.
+        return false;
     }
 }
