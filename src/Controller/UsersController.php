@@ -20,6 +20,12 @@ class UsersController extends AppController
         $this->viewBuilder()->setLayout('webtraning-zone');
     }
 
+    public function initialize()
+    {
+        parent::initialize();
+        $this->Auth->allow(['logout']);
+    }
+
     /**
      * Index method
      *
@@ -129,5 +135,11 @@ class UsersController extends AppController
 
             $this->Flash->error('User or password is incorrect :(');
         }
+    }
+
+    public function logout()
+    {
+        $this->Flash->success('Session finished.');
+        return $this->redirect($this->Auth->logout());
     }
 }
