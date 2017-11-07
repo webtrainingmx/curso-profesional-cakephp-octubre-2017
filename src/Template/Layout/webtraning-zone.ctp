@@ -38,12 +38,11 @@ $cakeDescription = 'Webtraining Zone';
     <?= $this->Html->css('webtraining-zone.css') ?>
 </head>
 <body>
-    <?php echo $this->element('common/header'); ?>
+    <?= $this->element('common/header') ?>
     <?= $this->Flash->render() ?>
     <div class="container clearfix">
         <?= $this->fetch('content') ?>
     </div>
-    <footer>
-    </footer>
+    <?= $this->element('common/footer') ?>
 </body>
 </html>
