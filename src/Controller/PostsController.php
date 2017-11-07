@@ -15,7 +15,7 @@ class PostsController extends AppController
     {
         $action = $this->request->getParam('action');
         // Add posts is ALWAYS allowed for authenticated users
-        if (in_array($action, ['add'])) {
+        if (in_array($action, ['add', 'view'])) {
             return true;
         }
 
@@ -41,6 +41,7 @@ class PostsController extends AppController
     {
         $post = $this->Posts->findBySlug($slug)->firstOrFail();
         $this->set(compact('post'));
+        $this->set('_serialize', ['post']);
     }
 
     public function add()
