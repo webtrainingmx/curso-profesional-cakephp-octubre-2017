@@ -50,7 +50,8 @@ class PostsController extends AppController
         if ($this->request->is('post')) {
             $post = $this->Posts->patchEntity($post, $this->request->getData());
 
-            $post->user_id = 1;
+            // Fixed the user id
+            $post->user_id = $this->Auth->user('id');
 
             if ($this->Posts->save($post)) {
                 $this->Flash->success(__('Post guardado'));
@@ -77,7 +78,10 @@ class PostsController extends AppController
             ->firstOrFail();
 
         if ($this->request->is(['post', 'put'])) {
-            $this->Posts->patchEntity($post, $this->request->getData());
+            $this->Posts->patchEntity($post, $this->request->getData(), [
+                // Disable modification of user_id
+                'accessibleFields' => ['user_id' => false]
+            ]);
             if ($this->Posts->save($post)) {
                 $this->Flash->success(__('Post guardado'));
                 return $this->redirect(['action' => 'index']);
