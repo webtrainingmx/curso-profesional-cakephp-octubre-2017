@@ -26,6 +26,18 @@ class UsersController extends AppController
         $this->Auth->allow(['logout']);
     }
 
+    public function isAuthorized($user)
+    {
+        $action = $this->request->getParam('action');
+
+        if (in_array($action, ['add', 'index', 'edit', 'view'])) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
     /**
      * Index method
      *
