@@ -1,0 +1,13 @@
+.message {
+  padding: 15px;
+  margin-bottom: 21px;
+  border: 1px solid transparent;
+  border-radius: 0;
+  text-align: center;
+
+  &.error {
+    background-color: #ff7518;
+    border-color: #ff4309;
+    color: #ffffff;
+  }
+}
